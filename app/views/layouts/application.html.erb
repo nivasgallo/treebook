@@ -12,13 +12,23 @@
 	  	<div class="container">
 		    <a class="brand" href="#">Textbook</a>
 		    <ul class="nav">
-		      <li class="active"><a href="#">Home</a></li>
 		      <li><%= link_to "All Statuses", statuses_path %></li>
+		    </ul>
+		    <ul class="nav pull-right">
+		    	<% if user_signed_in? %>
+		    	<li><%= link_to current_user.full_name, edit_user_registration_path %></li>
+		    	<li><%= link_to "logout", destroy_user_session_path, method: :delete %></li>
+		    	<% else %>
+		    	<li><%= link_to "register", new_user_registration_path %>
+		    	<li><%= link_to "login", new_user_session_path %>
+		    	<% end %>
 		    </ul>
 		</div>
 	  </div>
 	</div>
 	<div class="container">
+		<p class="notice"><%= notice %></p>
+       	<p class="alert"><%= alert %></p>
 		<%= yield %>
 	</div>
 </body>
